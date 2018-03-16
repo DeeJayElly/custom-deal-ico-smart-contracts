@@ -24,21 +24,30 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     // Refund vault used to hold funds while crowdsale is running
     RefundVault private vault;
 
-
+    /**
+     * @title RefundableCrowdsale
+     * @dev RefundableCrowdsale Constructor
+     */
     function RefundableCrowdsale(uint256 _goal) {
         require(_goal > 0);
         vault = new RefundVault(wallet);
         goal = _goal;
     }
 
-    // We're overriding the fund forwarding from Crowdsale.
-    // In addition to sending the funds, we want to call
-    // the RefundVault deposit function
+    /**
+     * @title forwardFunds
+     * @dev We're overriding the fund forwarding from Crowdsale.
+     * In addition to sending the funds, we want to call
+     * the RefundVault deposit function
+     */
     function forwardFunds() internal {
         vault.deposit.value(msg.value)(msg.sender);
     }
 
-    // if crowdsale is unsuccessful, investors can claim refunds here
+    /**
+     * @title claimRefund
+     * @dev If crowdsale is unsuccessful, investors can claim refunds here
+     */
     function claimRefund() public {
         require(isFinalized);
         require(!goalReached());
@@ -46,7 +55,10 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
         vault.refund(msg.sender);
     }
 
-    // vault finalization task, called when owner calls finalize()
+    /**
+     * @title finalization
+     * @dev Vault finalization task, called when owner calls finalize()
+     */
     function finalization() internal {
         if (goalReached()) {
             vault.close();
@@ -56,7 +68,10 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
         super.finalization();
     }
 
-    //
+    /**
+     * @title goalReached
+     * @dev Goal reached function called to check if the cap goal is reached
+     */
     function goalReached() public constant returns (bool) {
         if (weiRaised >= goal) {
             _goalReached = true;
@@ -69,12 +84,18 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
         }
     }
 
-    //
+    /**
+     * @title updateGoalCheck
+     * @dev If the cap goal is reached then updated the _goalReached
+     */
     function updateGoalCheck() onlyOwner public {
         _goalReached = true;
     }
 
-    //
+    /**
+     * @title getVaultAddress
+     * @dev Get vault address
+     */
     function getVaultAddress() onlyOwner public returns (address) {
         return vault;
     }
