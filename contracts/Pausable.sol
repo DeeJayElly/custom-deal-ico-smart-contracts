@@ -1,6 +1,6 @@
 pragma solidity ^0.4.8;
 
-import "../contracts/Ownable.sol";
+import './Ownable.sol';
 
 /*
  * Pausable

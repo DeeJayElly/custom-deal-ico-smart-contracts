@@ -81,11 +81,11 @@ contract Crowdsale is Ownable {
     uint256 public remainingReserveSupply = reserveSupply;
 
     /**
-     *  @bool checkBurnTokens
-     *  @bool upgradePreICOSupply
-     *  @bool upgradeICOSupply
-     *  @bool grantReserveSupply
-    */
+     * @bool checkBurnTokens
+     * @bool upgradePreICOSupply
+     * @bool upgradeICOSupply
+     * @bool grantReserveSupply
+     */
     bool private checkBurnTokens;
     bool private upgradePreICOSupply;
     bool private upgradeICOSupply;
@@ -101,6 +101,11 @@ contract Crowdsale is Ownable {
      */
     event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint256 value, uint256 amount);
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     // CustomDeal Crowdsale constructor
     function Crowdsale(uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet) {
         require(_startTime >= now);
@@ -123,7 +128,7 @@ contract Crowdsale is Ownable {
         // Pre-ICO end time
         preIcoEndTime = preIcoStartTime + 5 minutes;
 
-        // // ICO start Time
+        // ICO start Time
         ICOstartTime = preIcoEndTime;
 
         // ICO end Time
@@ -135,14 +140,14 @@ contract Crowdsale is Ownable {
         // Multi-sig wallet where funds will be saved
         wallet = _wallet;
 
-        /** Calculations of Bonuses in ICO or Pre-ICO */
+        // Calculations of Bonuses in ICO or Pre-ICO
         preSaleBonus = SafeMath.div(SafeMath.mul(rate, 25), 100);
         preICOBonus = SafeMath.div(SafeMath.mul(rate, 10), 100);
         firstWeekBonus = SafeMath.div(SafeMath.mul(rate, 20), 100);
         secondWeekBonus = SafeMath.div(SafeMath.mul(rate, 10), 100);
         thirdWeekBonus = SafeMath.div(SafeMath.mul(rate, 5), 100);
 
-        /** ICO bonuses week calculations 604800 */
+        // ICO bonuses week calculations 604800
         weekOne = SafeMath.add(ICOstartTime, 3 minutes);
         weekTwo = SafeMath.add(weekOne, 3 minutes);
         weekThree = SafeMath.add(weekTwo, 3 minutes);
@@ -152,31 +157,48 @@ contract Crowdsale is Ownable {
         upgradeICOSupply = false;
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     // creates the token to be sold.
     // override this method to have crowdsale of a specific mintable token.
     function createTokenContract() internal returns (MintableToken) {
         return new MintableToken();
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     // fallback function can be used to buy tokens
     function() payable {
         buyTokens(msg.sender);
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     // High level token purchase function
     function buyTokens(address beneficiary) public payable {
         require(beneficiary != 0x0);
         require(validPurchase());
 
         uint256 weiAmount = msg.value;
-        // minimum investment should be 0.10 ETH
+
+        // Minimum investment should be 0.10 ETH
         require(weiAmount >= 0.10 * 1 ether);
 
         uint256 accessTime = now;
         uint256 tokens = 0;
         uint256 supplyTokens = 0;
         uint256 bonusTokens = 0;
-        // calculating the Pre-Sale, Pre-ICO and ICO bonuses on the basis of timing
+
+        // Calculating the Pre-Sale, Pre-ICO and ICO bonuses on the basis of timing
         if ((accessTime >= preStartTime) && (accessTime < preEndTime)) {
             require(preSaleSupply > 0);
 
@@ -232,34 +254,55 @@ contract Crowdsale is Ownable {
             revert();
         }
 
-        // update state
+        // Update state
         weiRaised = weiRaised.add(weiAmount);
-        // tokens are minting here
+
+        // Tokens are minting here
         token.mint(beneficiary, tokens);
         TokenPurchase(msg.sender, beneficiary, weiAmount, tokens);
-        // funds are forwarding
+
+        // Funds are forwarding
         forwardFunds();
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     // send ether to the fund collection wallet
     // override to create custom fund forwarding mechanisms
     function forwardFunds() internal {
         wallet.transfer(msg.value);
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     // @return true if the transaction can buy tokens
-
     function validPurchase() internal constant returns (bool) {
         bool withinPeriod = now >= preStartTime && now <= ICOEndTime;
         bool nonZeroPurchase = msg.value != 0;
         return withinPeriod && nonZeroPurchase;
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     // @return true if crowdsale event has ended
     function hasEnded() public constant returns (bool) {
         return now > ICOEndTime;
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     // @return true if burnToken function has ended
     function burnToken() onlyOwner public returns (bool) {
         require(hasEnded());
@@ -276,6 +319,11 @@ contract Crowdsale is Ownable {
     }
 
     /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
+    /**
        * @return true if bountyFunds function has ended
        * @param beneficiary address where owner wants to transfer tokens
        * @param valueToken value of token
@@ -289,6 +337,11 @@ contract Crowdsale is Ownable {
     }
 
     /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
+    /**
         @return true if grantRewardToken function has ended
     */
     function grantRewardToken() onlyOwner public {
@@ -301,6 +354,11 @@ contract Crowdsale is Ownable {
 
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     /**
        * Function transferToken works to transfer tokens to the specified address on the
          call of owner within the crowdsale timestamp.
@@ -317,10 +375,20 @@ contract Crowdsale is Ownable {
 
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     function getTokenAddress() onlyOwner public returns (address) {
         return token;
     }
 
+    /**
+     * @title validPurchase
+     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
+     * @return true if investors can buy at the moment
+     */
     function getPublicSupply() onlyOwner public returns (uint256) {
         return remainingPublicSupply;
     }

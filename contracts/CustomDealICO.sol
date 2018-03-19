@@ -10,10 +10,10 @@ pragma solidity ^0.4.13;
  * as they arrive.
  */
 
-import '../contracts/crowdsale/Crowdsale.sol';
-import '../contracts/crowdsale/CappedCrowdsale.sol';
-import '../contracts/crowdsale/RefundableCrowdsale.sol';
-import '../contracts/CustomDealToken.sol';
+import './crowdsale/Crowdsale.sol';
+import './crowdsale/CappedCrowdsale.sol';
+import './crowdsale/RefundableCrowdsale.sol';
+import './CustomDealToken.sol';
 
 contract CustomDealICO is Crowdsale, CappedCrowdsale, RefundableCrowdsale {
     uint256 _startTime = now;

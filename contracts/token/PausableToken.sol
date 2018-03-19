@@ -1,7 +1,7 @@
 pragma solidity ^0.4.11;
 
 import './StandardToken.sol';
-import '../lifecycle/Pausable.sol';
+import '../Pausable.sol';
 
 /**
  * @title Pausable token

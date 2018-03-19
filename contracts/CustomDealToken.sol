@@ -1,6 +1,6 @@
 pragma solidity ^0.4.11;
 
-import '../contracts/token/MintableToken.sol';
+import './token/MintableToken.sol';
 
 contract CustomDealToken is MintableToken {
     string public constant name = "Custom Deal Token";
