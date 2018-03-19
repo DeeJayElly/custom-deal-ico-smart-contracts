@@ -18,6 +18,7 @@ contract CappedCrowdsale is Crowdsale {
     /**
      * @title CappedCrowdsale
      * @dev CappedCrowdsale Constructor
+     * @param _cap Capitalization value
      */
     function CappedCrowdsale(uint256 _cap) {
         require(_cap > 0);
@@ -27,7 +28,7 @@ contract CappedCrowdsale is Crowdsale {
     /**
      * @title validPurchase
      * @dev Overriding Crowdsale#validPurchase to add extra cap logic
-     * @return true if investors can buy at the moment
+     * @return True if investors can buy at the moment
      */
     function validPurchase() internal constant returns (bool) {
         bool withinCap = weiRaised.add(msg.value) <= cap;
@@ -37,7 +38,7 @@ contract CappedCrowdsale is Crowdsale {
     /**
      * @title validPurchase
      * @dev Overriding Crowdsale#hasEnded to add cap logic
-     * @return true if crowdsale event has ended
+     * @return True if crowdsale event has ended
      */
     function hasEnded() public constant returns (bool) {
         bool capReached = weiRaised >= cap;

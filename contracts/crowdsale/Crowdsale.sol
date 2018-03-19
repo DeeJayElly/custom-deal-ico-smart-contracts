@@ -94,19 +94,21 @@ contract Crowdsale is Ownable {
     /**
      * Event for token purchase logging
      *
-     * @param purchaser who paid for the tokens
-     * @param beneficiary who got the tokens
-     * @param value weis paid for purchase
-     * @param amount amount of tokens purchased
+     * @param purchaser Who paid for the tokens
+     * @param beneficiary Who got the tokens
+     * @param value Weis paid for purchase
+     * @param amount Amount of tokens purchased
      */
     event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint256 value, uint256 amount);
 
     /**
-     * @title validPurchase
-     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
-     * @return true if investors can buy at the moment
+     * @title CustomDeal Crowdsale
+     * @dev CustomDeal Crowdsale Constructor
+     * @param _startTime Start time of crowdsale
+     * @param _endTime End time of crowdsale
+     * @param _rate Base rate of the token
+     * @param _wallet Address of wallet
      */
-    // CustomDeal Crowdsale constructor
     function Crowdsale(uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet) {
         require(_startTime >= now);
         require(_endTime >= _startTime);
@@ -134,13 +136,13 @@ contract Crowdsale is Ownable {
         // ICO end Time
         ICOEndTime = ICOstartTime + 15 minutes;
 
-        // Base Rate of CDL Token
+        // Base rate of CDL Token
         rate = _rate;
 
         // Multi-sig wallet where funds will be saved
         wallet = _wallet;
 
-        // Calculations of Bonuses in ICO or Pre-ICO
+        // Calculations of bonuses in ICO or Pre-ICO
         preSaleBonus = SafeMath.div(SafeMath.mul(rate, 25), 100);
         preICOBonus = SafeMath.div(SafeMath.mul(rate, 10), 100);
         firstWeekBonus = SafeMath.div(SafeMath.mul(rate, 20), 100);
@@ -158,12 +160,11 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title validPurchase
-     * @dev Overriding Crowdsale#validPurchase to add extra cap logic
-     * @return true if investors can buy at the moment
+     * @title createTokenContract
+     * @dev Creates the token to be sold
+     * override this method to have crowdsale of a specific mintable token
+     * @return true instance of mintable token
      */
-    // creates the token to be sold.
-    // override this method to have crowdsale of a specific mintable token.
     function createTokenContract() internal returns (MintableToken) {
         return new MintableToken();
     }
@@ -179,7 +180,7 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title validPurchase
+     * @title buyTokens
      * @dev Overriding Crowdsale#validPurchase to add extra cap logic
      * @return true if investors can buy at the moment
      */

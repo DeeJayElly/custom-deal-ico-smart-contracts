@@ -3,13 +3,16 @@ pragma solidity ^0.4.8;
 import './Ownable.sol';
 
 /*
- * Pausable
- * Abstract contract that allows children to implement an
+ * @title Pausable
+ * @dev Abstract contract that allows children to implement an
  * emergency stop mechanism.
  */
 contract Pausable is Ownable {
+
+    // Stopped true/false state
     bool public stopped;
 
+    // stopInEmergency modifier
     modifier stopInEmergency {
         if (stopped) {
             revert();
@@ -17,6 +20,7 @@ contract Pausable is Ownable {
         _;
     }
 
+    // onlyInEmergency modifier
     modifier onlyInEmergency {
         if (!stopped) {
             revert();
@@ -24,12 +28,18 @@ contract Pausable is Ownable {
         _;
     }
 
-    // called by the owner on emergency, triggers stopped state
+    /**
+     * @title emergencyStop
+     * @dec Called by the owner on emergency, triggers stopped state
+     */
     function emergencyStop() external onlyOwner {
         stopped = true;
     }
 
-    // called by the owner on end of emergency, returns to normal state
+    /**
+     * @title release
+     * @dec Called by the owner on end of emergency, returns to normal state
+     */
     function release() external onlyOwner onlyInEmergency {
         stopped = false;
     }

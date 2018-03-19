@@ -5,19 +5,42 @@ import './ERC20.sol';
 
 /**
  * @title SafeERC20
- * @dev Wrappers around ERC20 operations that throw on failure.
+ * @dev Wrappers around ERC20 operations that throw on failure
  * To use this library you can add a `using SafeERC20 for ERC20;` statement to your contract,
- * which allows you to call the safe operations as `token.safeTransfer(...)`, etc.
+ * which allows you to call the safe operations as `token.safeTransfer(...)`, etc
  */
 library SafeERC20 {
+
+    /**
+     * @title safeTransfer
+     * @dev Function to safe transfer funds
+     * @param token ERC20 token
+     * @param to Receiver address
+     * @param value Amount being sent
+     */
     function safeTransfer(ERC20Basic token, address to, uint256 value) internal {
         assert(token.transfer(to, value));
     }
 
+    /**
+     * @title safeTransferFrom
+     * @dev Function to safe transfer funds from particular address
+     * @param token ERC20 token
+     * @param from Spenders address
+     * @param to Receiver address
+     * @param value Amount being sent
+     */
     function safeTransferFrom(ERC20 token, address from, address to, uint256 value) internal {
         assert(token.transferFrom(from, to, value));
     }
 
+    /**
+     * @title safeApprove
+     * @dev Function to safe approve funds transfer
+     * @param token ERC20 token
+     * @param _spender Spenders address
+     * @param value Amount being sent
+     */
     function safeApprove(ERC20 token, address spender, uint256 value) internal {
         assert(token.approve(spender, value));
     }

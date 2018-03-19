@@ -4,10 +4,15 @@ import './StandardToken.sol';
 
 /**
  * @title Burnable Token
- * @dev Token that can be irreversibly burned (destroyed).
+ * @dev Token that can be irreversibly burned (destroyed)
  */
 contract BurnableToken is StandardToken {
 
+    /**
+     * Burn event
+     * @param burner Burner
+     * @param value Value
+     */
     event Burn(address indexed burner, uint256 value);
 
     /**

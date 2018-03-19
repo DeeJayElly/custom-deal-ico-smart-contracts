@@ -71,6 +71,7 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     /**
      * @title goalReached
      * @dev Goal reached function called to check if the cap goal is reached
+     * @return true if the goal is reached, false if it's not
      */
     function goalReached() public constant returns (bool) {
         if (weiRaised >= goal) {
@@ -95,6 +96,7 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     /**
      * @title getVaultAddress
      * @dev Get vault address
+     * @return vault address
      */
     function getVaultAddress() onlyOwner public returns (address) {
         return vault;
