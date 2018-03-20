@@ -39,6 +39,6 @@ contract FinalizableCrowdsale is Crowdsale {
      * should call super.finalization() to ensure the chain of finalization is
      * executed entirely.
      */
-    function finalization() internal pure {
+    function finalization() internal {
     }
 }

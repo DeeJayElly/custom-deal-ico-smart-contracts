@@ -32,7 +32,7 @@ contract CustomDealICO is Crowdsale, CappedCrowdsale, RefundableCrowdsale {
     uint256 _cap = 17000 * 1 ether;
 
     // Wallet address
-    address _wallet = 0x6330A553Fc93768F612722BB8c2eC78aC90B3bbc;
+    address _wallet = 0x2F608B2E4e95a62d4b05e41131871cF3ce008068;
 
     /**
      * @dev CustomDealICO Constructor
