@@ -16,17 +16,15 @@ contract CappedCrowdsale is Crowdsale {
     uint256 public cap;
 
     /**
-     * @title CappedCrowdsale
      * @dev CappedCrowdsale Constructor
      * @param _cap Capitalization value
      */
-    function CappedCrowdsale(uint256 _cap) {
+    function CappedCrowdsale(uint256 _cap) public {
         require(_cap > 0);
         cap = _cap;
     }
 
     /**
-     * @title validPurchase
      * @dev Overriding Crowdsale#validPurchase to add extra cap logic
      * @return True if investors can buy at the moment
      */
@@ -36,7 +34,6 @@ contract CappedCrowdsale is Crowdsale {
     }
 
     /**
-     * @title validPurchase
      * @dev Overriding Crowdsale#hasEnded to add cap logic
      * @return True if crowdsale event has ended
      */

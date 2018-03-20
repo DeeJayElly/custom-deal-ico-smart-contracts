@@ -9,7 +9,6 @@ import './ERC20Basic.sol';
 contract ERC20 is ERC20Basic {
 
     /**
-     * @title allowance
      * @dev Check allowance of transfer
      * @param owner The address to transfer to
      * @param spender Address of the spender
@@ -17,7 +16,6 @@ contract ERC20 is ERC20Basic {
     function allowance(address owner, address spender) public constant returns (uint256);
 
     /**
-     * @title transferFrom
      * @dev Transfer token from a specified address
      * @param from The address to transfer from
      * @param to The address to transfer to
@@ -26,7 +24,6 @@ contract ERC20 is ERC20Basic {
     function transferFrom(address from, address to, uint256 value) public returns (bool);
 
     /**
-     * @title approve
      * @dev Approve transfer of funds for a specified address
      * @param spender Address of the spender
      * @param value Amount being send

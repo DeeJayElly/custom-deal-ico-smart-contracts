@@ -22,10 +22,9 @@ contract CustomDealToken is MintableToken {
     uint256 public constant _totalSupply = 400000000 * 1 ether;
 
     /**
-     * @title CustomDealToken
      * @dev CustomDealToken Constructor
      */
-    function CustomDealToken() {
+    function CustomDealToken() public {
         totalSupply = _totalSupply;
     }
 }

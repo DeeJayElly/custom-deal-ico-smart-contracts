@@ -29,16 +29,14 @@ contract Pausable is Ownable {
     }
 
     /**
-     * @title emergencyStop
-     * @dec Called by the owner on emergency, triggers stopped state
+     * @dev Called by the owner on emergency, triggers stopped state
      */
     function emergencyStop() external onlyOwner {
         stopped = true;
     }
 
     /**
-     * @title release
-     * @dec Called by the owner on end of emergency, returns to normal state
+     * @dev Called by the owner on end of emergency, returns to normal state
      */
     function release() external onlyOwner onlyInEmergency {
         stopped = false;

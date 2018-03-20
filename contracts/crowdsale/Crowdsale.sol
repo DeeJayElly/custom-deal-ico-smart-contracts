@@ -102,14 +102,13 @@ contract Crowdsale is Ownable {
     event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint256 value, uint256 amount);
 
     /**
-     * @title CustomDeal Crowdsale
      * @dev CustomDeal Crowdsale Constructor
      * @param _startTime Start time of crowdsale
      * @param _endTime End time of crowdsale
      * @param _rate Base rate of the token
      * @param _wallet Address of wallet
      */
-    function Crowdsale(uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet) {
+    function Crowdsale(uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet) public {
         require(_startTime >= now);
         require(_endTime >= _startTime);
         require(_rate > 0);
@@ -160,7 +159,6 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title createTokenContract
      * @dev Creates the token to be sold
      * Override this method to have crowdsale of a specific mintable token
      * @return True instance of mintable token
@@ -170,15 +168,13 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title payable
      * @dev fallback function can be used to buy tokens
      */
-    function() payable {
+    function() public payable {
         buyTokens(msg.sender);
     }
 
     /**
-     * @title buyTokens
      * @dev High level token purchase function
      */
     function buyTokens(address beneficiary) public payable {
@@ -261,7 +257,6 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title forwardFunds
      * @dev Send ether to the fund collection wallet
      * Override to create custom fund forwarding mechanisms
      */
@@ -270,7 +265,6 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title validPurchase
      * @dev Overriding Crowdsale#validPurchase to add extra cap logic
      * @return True if the transaction can buy tokens
      */
@@ -281,7 +275,6 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title hasEnded
      * @dev Call to check if the crowdsale has been ended or not
      * @return True if crowdsale event has ended
      */
@@ -290,7 +283,6 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title burnToken
      * @dev Burn all remaining tokens after crowdsale has ended
      * @return True if burnToken function has ended
      */
@@ -308,7 +300,6 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title bountyFunds
      * @dev Overriding Crowdsale#validPurchase to add extra cap logic
      * @param beneficiary Address where owner wants to transfer tokens
      * @param valueToken Value of token
@@ -321,7 +312,6 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title grantRewardToken
      * @dev Grant reward token when the crowdsale has ended
      */
     function grantRewardToken() onlyOwner public {
@@ -332,7 +322,6 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title transferToken
      * @dev Function transferToken works to transfer tokens to the specified address on the
      * call of owner within the crowdsale timestamp
      * @param beneficiary Address where owner wants to transfer tokens
@@ -347,20 +336,18 @@ contract Crowdsale is Ownable {
     }
 
     /**
-     * @title getTokenAddress
      * @dev Return token address
      * @return True if the operation was successful
      */
-    function getTokenAddress() onlyOwner public returns (address) {
+    function getTokenAddress() onlyOwner public view returns (address) {
         return token;
     }
 
     /**
-     * @title getPublicSupply
      * @dev Return remaining public supply of tokens
      * @return Remaining public supply of tokens
      */
-    function getPublicSupply() onlyOwner public returns (uint256) {
+    function getPublicSupply() onlyOwner public view returns (uint256) {
         return remainingPublicSupply;
     }
 }

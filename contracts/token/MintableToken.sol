@@ -35,8 +35,6 @@ contract MintableToken is StandardToken, Ownable {
     }
 
     /**
-     * @title mint
-     * @dev Function to mint tokens
      * @param _to The address that will receive the minted tokens.
      * @param _amount The amount of tokens to mint.
      * @return A boolean that indicates if the operation was successful.
@@ -50,7 +48,6 @@ contract MintableToken is StandardToken, Ownable {
     }
 
     /**
-     * @title finishMinting
      * @dev Function to stop minting new tokens
      * @return True if the operation was successful
      */
@@ -61,7 +58,6 @@ contract MintableToken is StandardToken, Ownable {
     }
 
     /**
-     * @title burnTokens
      * @dev Function to burn all tokens
      * @param _unsoldTokens All unsold tokens
      * @return True if the tokens are burned

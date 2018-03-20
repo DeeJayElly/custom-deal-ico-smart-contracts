@@ -16,7 +16,6 @@ contract BasicToken is ERC20Basic {
     mapping(address => uint256) balances;
 
     /**
-     * @title transfer
      * @dev Transfer token for a specified address
      * @param _to The address to transfer to
      * @param _value The amount to be transferred
@@ -32,7 +31,6 @@ contract BasicToken is ERC20Basic {
     }
 
     /**
-     * @title balanceOf
      * @dev Gets the balance of the specified address
      * @param _owner The address to query the the balance of
      * @return An uint256 representing the amount owned by the passed address

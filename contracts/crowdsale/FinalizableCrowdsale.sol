@@ -21,7 +21,6 @@ contract FinalizableCrowdsale is Crowdsale {
     event Finalized();
 
     /**
-     * @title finalize
      * @dev Must be called after crowdsale ends, to do some extra finalization
      * work. Calls the contract's finalization function.
      */
@@ -36,11 +35,10 @@ contract FinalizableCrowdsale is Crowdsale {
     }
 
     /**
-     * @title finalization
      * @dev Can be overridden to add finalization logic. The overriding function
      * should call super.finalization() to ensure the chain of finalization is
      * executed entirely.
      */
-    function finalization() internal {
+    function finalization() internal pure {
     }
 }

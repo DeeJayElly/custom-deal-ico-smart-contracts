@@ -12,7 +12,6 @@ import './ERC20.sol';
 library SafeERC20 {
 
     /**
-     * @title safeTransfer
      * @dev Function to safe transfer funds
      * @param token ERC20 token
      * @param to Receiver address
@@ -23,7 +22,6 @@ library SafeERC20 {
     }
 
     /**
-     * @title safeTransferFrom
      * @dev Function to safe transfer funds from particular address
      * @param token ERC20 token
      * @param from Spenders address
@@ -35,10 +33,9 @@ library SafeERC20 {
     }
 
     /**
-     * @title safeApprove
      * @dev Function to safe approve funds transfer
      * @param token ERC20 token
-     * @param _spender Spenders address
+     * @param spender Spenders address
      * @param value Amount being sent
      */
     function safeApprove(ERC20 token, address spender, uint256 value) internal {

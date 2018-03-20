@@ -19,11 +19,10 @@ contract Ownable {
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     /**
-     * @title Ownable
      * @dev The Ownable constructor sets the original `owner` of the contract to the sender
      * account
      */
-    function Ownable() {
+    function Ownable() public {
         owner = msg.sender;
     }
 
@@ -34,7 +33,6 @@ contract Ownable {
     }
 
     /**
-     * @title transferOwnership
      * @dev Allows the current owner to transfer control of the contract to a newOwner
      * @param newOwner The address to transfer ownership to.
      */

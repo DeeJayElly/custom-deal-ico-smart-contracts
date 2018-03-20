@@ -25,17 +25,15 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     RefundVault private vault;
 
     /**
-     * @title RefundableCrowdsale
      * @dev RefundableCrowdsale Constructor
      */
-    function RefundableCrowdsale(uint256 _goal) {
+    function RefundableCrowdsale(uint256 _goal) public {
         require(_goal > 0);
         vault = new RefundVault(wallet);
         goal = _goal;
     }
 
     /**
-     * @title forwardFunds
      * @dev We're overriding the fund forwarding from Crowdsale.
      * In addition to sending the funds, we want to call
      * the RefundVault deposit function
@@ -45,7 +43,6 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     }
 
     /**
-     * @title claimRefund
      * @dev If crowdsale is unsuccessful, investors can claim refunds here
      */
     function claimRefund() public {
@@ -56,7 +53,6 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     }
 
     /**
-     * @title finalization
      * @dev Vault finalization task, called when owner calls finalize()
      */
     function finalization() internal {
@@ -69,11 +65,10 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     }
 
     /**
-     * @title goalReached
      * @dev Goal reached function called to check if the cap goal is reached
      * @return true if the goal is reached, false if it's not
      */
-    function goalReached() public constant returns (bool) {
+    function goalReached() public payable returns (bool) {
         if (weiRaised >= goal) {
             _goalReached = true;
             return true;
@@ -86,7 +81,6 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     }
 
     /**
-     * @title updateGoalCheck
      * @dev If the cap goal is reached then updated the _goalReached
      */
     function updateGoalCheck() onlyOwner public {
@@ -94,11 +88,10 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     }
 
     /**
-     * @title getVaultAddress
      * @dev Get vault address
      * @return vault address
      */
-    function getVaultAddress() onlyOwner public returns (address) {
+    function getVaultAddress() onlyOwner public view returns (address) {
         return vault;
     }
 }

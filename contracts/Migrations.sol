@@ -18,7 +18,6 @@ contract Migrations {
     }
 
     /**
-     * @title Migrations
      * @dev Migrations Constructor
      */
     function Migrations() public {
@@ -26,7 +25,6 @@ contract Migrations {
     }
 
     /**
-     * @title setCompleted
      * @dev Set complete migration after successful migration
      * @param completed True/false based on the completed state
      */
@@ -35,7 +33,6 @@ contract Migrations {
     }
 
     /**
-     * @title upgrade
      * @dev Upgrade migration function
      * @param new_address New address where the contract is migrated
      */

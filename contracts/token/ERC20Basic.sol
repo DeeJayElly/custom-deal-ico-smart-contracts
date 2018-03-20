@@ -11,14 +11,12 @@ contract ERC20Basic {
     uint256 public totalSupply;
 
     /**
-     * @title balanceOf
      * @dev Get balance of the specified account address
      * @param who Address of the account
      */
     function balanceOf(address who) public constant returns (uint256);
 
     /**
-     * @title transfer
      * @dev Approve transfer of funds for a specified address
      * @param to The address where the amount is being sent to
      * @param value Amount being send

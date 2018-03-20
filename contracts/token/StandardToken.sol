@@ -15,7 +15,6 @@ contract StandardToken is ERC20, BasicToken {
     mapping(address => mapping(address => uint256)) allowed;
 
     /**
-     * @title tranferFrom
      * @dev Transfer tokens from one address to another
      * @param _from address The address which you want to send tokens from
      * @param _to address The address which you want to transfer to
@@ -37,7 +36,6 @@ contract StandardToken is ERC20, BasicToken {
     }
 
     /**
-     * @title approve
      * @dev Approve the passed address to spend the specified amount of tokens on behalf of msg.sender
      * Beware that changing an allowance with this method brings the risk that someone may use both the old
      * and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this
@@ -54,7 +52,6 @@ contract StandardToken is ERC20, BasicToken {
     }
 
     /**
-     * @title allowance
      * @dev Function to check the amount of tokens that an owner allowed to a spender.
      * @param _owner address The address which owns the funds.
      * @param _spender address The address which will spend the funds.
@@ -65,7 +62,6 @@ contract StandardToken is ERC20, BasicToken {
     }
 
     /**
-     * @title increaseApproval
      * Approve should be called when allowed[_spender] == 0. To increment
      * allowed value is better to use this function to avoid 2 calls (and wait until
      * the first transaction is mined)
@@ -74,15 +70,13 @@ contract StandardToken is ERC20, BasicToken {
      * @param _addedValue Value being sent
      * @return True if the operation was successful
      */
-    function increaseApproval(address _spender, uint _addedValue)
-    returns (bool success) {
+    function increaseApproval(address _spender, uint _addedValue) public returns (bool success) {
         allowed[msg.sender][_spender] = allowed[msg.sender][_spender].add(_addedValue);
         Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
         return true;
     }
 
     /**
-     * @title decreaseApproval
      * Decrease approval should be called when allowed[_spender] > 0. To increment
      * allowed value is better to use this function to avoid 2 calls (and wait until
      * the first transaction is mined)
@@ -91,8 +85,7 @@ contract StandardToken is ERC20, BasicToken {
      * @param _subtractedValue Value being sent
      * @return True if the operation was successful
      */
-    function decreaseApproval(address _spender, uint _subtractedValue)
-    returns (bool success) {
+    function decreaseApproval(address _spender, uint _subtractedValue) public returns (bool success) {
         uint oldValue = allowed[msg.sender][_spender];
         if (_subtractedValue > oldValue) {
             allowed[msg.sender][_spender] = 0;

@@ -32,21 +32,19 @@ contract CustomDealICO is Crowdsale, CappedCrowdsale, RefundableCrowdsale {
     uint256 _cap = 17000 * 1 ether;
 
     // Wallet address
-    address _wallet = 0x00000000000000000000000000000000;
+    address _wallet = 0x6330A553Fc93768F612722BB8c2eC78aC90B3bbc;
 
     /**
-     * @title CustomDealICO
      * @dev CustomDealICO Constructor
      */
     function CustomDealICO()
     CappedCrowdsale(_cap)
     FinalizableCrowdsale()
     RefundableCrowdsale(_goal)
-    Crowdsale(_startTime, _endTime, _rate, _wallet) {
+    Crowdsale(_startTime, _endTime, _rate, _wallet) public {
     }
 
     /**
-     * @title createTokenContract
      * @dev Creating main token contract
      * @return Token instance which is mintable
      */
