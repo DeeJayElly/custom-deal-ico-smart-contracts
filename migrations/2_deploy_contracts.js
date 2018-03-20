@@ -1,5 +1,7 @@
-var CustomDealICO = artifacts.require('./CustomDealICO.sol');
+// var CustomDealICO = artifacts.require('./CustomDealICO.sol');
+var testICO = artifacts.require('./TestICO.sol');
 
 module.exports = function (deployer) {
-    return deployer.deploy(CustomDealICO);
+    // deployer.deploy(CustomDealICO);
+    deployer.deploy(testICO);
 };
