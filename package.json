@@ -1,0 +1,56 @@
+{
+  "name": "custom-deal-ico",
+  "version": "0.0.1",
+  "description": "Custom Deal ICO ERC20 Smart Contract Token (CDL)",
+  "main": "truffle.js",
+  "author": "Custom Deal <Aleksandar Djordjevic - aca_eliminator@hotmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DeeJayElly/custom-deal-ico-smart-contracts"
+  },
+  "bugs": {
+    "url": "https://github.com/DeeJayElly/custom-deal-ico-smart-contracts/issues"
+  },
+  "homepage": "https://github.com/DeeJayElly/custom-deal-ico-smart-contracts#README",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "compile": "truffle compile",
+    "ganache-cli": "ganache-cli -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' -p 7545 -e 1000 -l 672197500",
+    "migrate:ganache": "rm -rf build && truffle migrate --network=ganache",
+    "test": "truffle test",
+    "lint": "solhint ./contracts/*.sol",
+    "coverage": "solidity-coverage"
+  },
+  "engines": {
+    "node": ">=8.9.4"
+  },
+  "engineStrict": true,
+  "devDependencies": {
+    "bignumber.js": "^7.2.1",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.2",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-jsx": "^5.0.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "ganache-cli": "^6.1.0",
+    "lite-server": "^2.3.0",
+    "random-bytes": "^1.0.0",
+    "solc": "^0.4.21",
+    "solhint": "^1.1.10",
+    "solidity-coverage": "^0.5.4",
+    "standard": "^11.0.1",
+    "truffle": "^4.1.5",
+    "truffle-hdwallet-provider": "0.0.5",
+    "web3": "^1.0.0-beta.33"
+  },
+  "dependencies": {
+    "zeppelin-solidity": "^1.5.0"
+  }
+}

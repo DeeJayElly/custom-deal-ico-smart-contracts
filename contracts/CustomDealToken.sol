@@ -1,6 +1,6 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.18;
 
-import './token/MintableToken.sol';
+import '../node_modules/zeppelin-solidity/contracts/token/MintableToken.sol';
 
 /**
  * @title CustomDealToken
@@ -17,16 +17,5 @@ contract CustomDealToken is MintableToken {
 
     // Number of decimal places of the token
     uint256 public constant decimals = 18;
-
-    // Total supply amount
-    uint256 public constant _totalSupply = 400000000 * 1 ether;
-
-    /**
-     * @dev CustomDealToken Constructor
-     */
-    function CustomDealToken() public {
-        totalSupply = _totalSupply;
-    }
 }
-
 
