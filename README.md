@@ -17,9 +17,9 @@ Price in ICO for 1 CDL: 0.04 USD
 
 Total Supply: 400 000 000 CDL
 
-Tokens for sale: 300 000 000 CDL
+Tokens for sale: 280 000 000 CDL
 
-Distributed in ICO: 75%
+Distributed in ICO: 70%
 
 Soft cap: 1 000 000 USD
 
