@@ -658,14 +658,15 @@ contract CustomDealICO is CappedCrowdsale, RefundableCrowdsale {
 
         stage = _stage;
 
+        // based on the price of 1 ETH = 600$
         if (stage == CrowdsaleStage.PreICOFirst) {
-            setCurrentRate(43750);
+            setCurrentRate(40000);
         } else if (stage == CrowdsaleStage.PreICOSecond) {
-            setCurrentRate(38500);
+            setCurrentRate(33335);
         } else if (stage == CrowdsaleStage.ICOFirst) {
-            setCurrentRate(17500);
+            setCurrentRate(15000);
         } else if (stage == CrowdsaleStage.ICOSecond) {
-            setCurrentRate(11666);
+            setCurrentRate(10000);
         }
     }
 
