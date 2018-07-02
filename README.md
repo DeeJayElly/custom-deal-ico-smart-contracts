@@ -21,7 +21,5 @@ Tokens for sale: 280 000 000 CDL
 
 Distributed in ICO: 70%
 
-Soft cap: 1 000 000 USD
-
 Hard cap: 12 000 000 USD
 
